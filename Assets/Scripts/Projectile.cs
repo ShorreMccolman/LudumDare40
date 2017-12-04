@@ -29,6 +29,9 @@ public class Projectile : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
+		if (other.isTrigger)
+			return;
+
 		Actor actor = other.GetComponent<Actor> ();
 		if(actor) {
 			actor.Damage (damage);

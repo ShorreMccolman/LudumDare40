@@ -55,19 +55,23 @@ public class PlayerController : MonoBehaviour {
 		inputShift = Input.GetButton (SHIFT_INPUT);
 
 		if(inputShift) {
-			if(verticalMovement != null) {
-				verticalMovement (Input.GetAxis (FORWARD_MOVEMENT_INPUT) * Time.fixedDeltaTime);
-			}	
+//			if(verticalMovement != null) {
+//				verticalMovement (Input.GetAxis (FORWARD_MOVEMENT_INPUT) * Time.fixedDeltaTime);
+//			}	
 			if(rollRotation != null) {
 				rollRotation (Input.GetAxis (SIDEWAYS_MOVEMENT_INPUT) * Time.fixedDeltaTime);
 			}
 		} else {
-			if(forwardMovement != null) {
-				forwardMovement (Input.GetAxis (FORWARD_MOVEMENT_INPUT) * Time.fixedDeltaTime);
-			}	
+//			if(forwardMovement != null) {
+//				forwardMovement (Input.GetAxis (FORWARD_MOVEMENT_INPUT) * Time.fixedDeltaTime);
+//			}	
 			if(sidewaysMovement != null) {
 				sidewaysMovement (Input.GetAxis (SIDEWAYS_MOVEMENT_INPUT) * Time.fixedDeltaTime);
 			}
+		}
+
+		if(forwardMovement != null) {
+			forwardMovement (Input.GetAxis (FORWARD_MOVEMENT_INPUT) * Time.fixedDeltaTime);
 		}
 
 		if(pitchRotation != null) {
