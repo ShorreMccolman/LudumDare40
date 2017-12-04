@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : Item {
-
+	
 	public Projectile ProjectilePrefab;
 
 	public override void EquipItemToPlayer(Player player)

@@ -4,6 +4,10 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
+Assets/PostProcessing*
+Assets/Standard Assets*
+Assets/UETools*
+Assets/ProCore*
 
 # Visual Studio 2015 cache directory
 /.vs/
