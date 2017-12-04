@@ -103,6 +103,7 @@ MonoBehaviour:
   speed: 5
   explosion: {fileID: 114318356647740500, guid: 8a5f08d42cd9b2b49872dd880cbbee42,
     type: 2}
+  weaponType: 1
 --- !u!136 &136717853262554708
 CapsuleCollider:
   m_ObjectHideFlags: 1

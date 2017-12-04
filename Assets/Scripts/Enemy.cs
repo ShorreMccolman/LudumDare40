@@ -86,6 +86,8 @@ public class Enemy : Actor {
 
 	public Weapon defaultWeapon;
 	public Light headlight;
+
+	Vector3 origin;
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -97,9 +99,20 @@ public class Enemy : Actor {
 		if(player) {
 			float dist = Vector3.Distance (player.transform.position, transform.position);
 			if (dist < 15.0f) {
+
+				Vector3 towardPlayer = player.transform.position - transform.position;
+
+				RaycastHit hit;
+				Ray ray = new Ray (transform.position, towardPlayer);
+				if(Physics.Raycast (ray, out hit)) {
+					if(hit.collider.tag != "Player") {
+						return;
+					}
+				}
+
 				transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.LookRotation (player.transform.position - transform.position), rotationSpeed * Time.fixedDeltaTime);
 
-				float angle = Vector3.Angle (transform.forward, player.transform.position - transform.position);
+				float angle = Vector3.Angle (transform.forward, towardPlayer);
 
 				if (dist > 10.0f) {
 					headlight.color = Color.yellow;
@@ -129,6 +142,13 @@ public class Enemy : Actor {
 		base.Init ();
 
 		CurrentWeapon = defaultWeapon;
+		origin = transform.position;
+	}
+
+	public void Reset()
+	{
+		transform.position = origin;
+		CurrentHealth = maxHealth;
 	}
 
 	public void UpdateWithPlayerLevel(int level)
@@ -145,7 +165,7 @@ public class Enemy : Actor {
 		base.Damage (damage);
 
 		if(CurrentHealth <= 0) {
-			Destroy (this.gameObject);
+			EnemyManager.Instance.KillEnemy (this);
 		}
 	}
 		
