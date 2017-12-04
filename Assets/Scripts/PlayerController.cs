@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
 	public const string YAW_ROTATION_INPUT = "Rotate";
 	public const string FIRE_WEAPON_INPUT = "Fire";
 	public const string SHIFT_INPUT = "Shift";
+	public const string TOGGLE_LIGHT_INPUT = "Light";
+	public const string TOGGLE_WEAPON_INPUT = "Toggle";
 
 	public delegate void InputBinding (float input);
 	public InputBinding forwardMovement;
@@ -22,8 +24,13 @@ public class PlayerController : MonoBehaviour {
 
 	public delegate void KeyBinding();
 	public KeyBinding fireButton;
+	public KeyBinding lightButton;
+	public KeyBinding toggleButton;
+	public KeyBinding pauseButton;
 
 	bool inputShift;
+	float toggleBuffer;
+
 
 	Player player;
 	public Player Player
@@ -40,9 +47,6 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		Player = GetComponent<Player> ();
 		Player.SetupController (this);
-
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	// Update is called once per frame
@@ -73,14 +77,40 @@ public class PlayerController : MonoBehaviour {
 			yawRotation (Input.GetAxis (YAW_ROTATION_INPUT) * Time.fixedDeltaTime);
 		}
 
+		if(toggleButton != null) {
+			if(toggleBuffer <= 0.0f && Mathf.Abs(Input.GetAxis(TOGGLE_WEAPON_INPUT)) > 0.8f) {
+				toggleButton ();
+				toggleBuffer = 0.3f;
+			}
+
+			if (toggleBuffer > 0.0f)
+				toggleBuffer -= Time.fixedDeltaTime;
+		}
+	}
+
+	void Update()
+	{
 		if(Input.GetButtonDown(FIRE_WEAPON_INPUT)) {
 			if(fireButton != null) {
 				fireButton ();
 			}
 		}
 
+		if(Input.GetButtonDown(TOGGLE_LIGHT_INPUT)) {
+			if(lightButton != null) {
+				lightButton ();
+			}
+		}
+
+		if(Input.GetButtonDown(TOGGLE_WEAPON_INPUT)) {
+			if(toggleButton != null) {
+				toggleButton ();
+			}
+		}
+
 		if(Input.GetKeyDown(KeyCode.Escape)) {
-			Application.Quit ();
+			if (pauseButton != null)
+				pauseButton ();
 		}
 	}
 }

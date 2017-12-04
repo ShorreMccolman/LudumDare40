@@ -5,38 +5,46 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Actor : MonoBehaviour {
 	[SerializeField]
-	int maxHealth = 2;
+	protected int maxHealth = 2;
 	[SerializeField]
-	float forwardSpeed;
+	protected float forwardSpeed;
 	[SerializeField]
-	float sidewaysSpeed;
+	protected float sidewaysSpeed;
 	[SerializeField]
-	float verticalSpeed;
+	protected float verticalSpeed;
 	[SerializeField]
-	float pitchSpeed;
+	protected float pitchSpeed;
 	[SerializeField]
-	float yawSpeed;
+	protected float yawSpeed;
 	[SerializeField]
-	float rollSpeed;
+	protected float rollSpeed;
 
-	public Projectile ProjectilePrefab;
+	protected int adjustedHealth;
+
 	public Transform ProjectileSpawnPosition;
+
+	Weapon currentWeapon;
+	public Weapon CurrentWeapon
+	{
+		get { return currentWeapon; }
+		set { currentWeapon = value; }
+	}
 
 	int currentHealth;
 	public int CurrentHealth
 	{
 		get { return currentHealth; }
-		private set { currentHealth = value; }
+		protected set { currentHealth = value; }
 	}
 
 	public float HealthRatio
 	{
 		get {
-			return (float)CurrentHealth / (float)maxHealth;
+			return (float)CurrentHealth / (float)adjustedHealth;
 		}
 	}
 
-	Rigidbody rb;
+	protected Rigidbody rb;
 
 	void Start()
 	{
@@ -46,7 +54,8 @@ public class Actor : MonoBehaviour {
 	protected virtual void Init()
 	{
 		rb = GetComponent<Rigidbody> ();
-		CurrentHealth = maxHealth;
+		adjustedHealth = maxHealth;
+		CurrentHealth = adjustedHealth;
 	}
 
 	public virtual void Damage(int damage)
@@ -86,8 +95,18 @@ public class Actor : MonoBehaviour {
 
 	protected virtual void FireWeapon()
 	{
-		Projectile obj = Instantiate (ProjectilePrefab);
+		if(CurrentWeapon == null) {
+			return;
+		}
+
+		Projectile obj = Instantiate (CurrentWeapon.ProjectilePrefab);
 		obj.transform.position = ProjectileSpawnPosition.position;
 		obj.transform.rotation = ProjectileSpawnPosition.rotation;
+		obj.SetOrigin (ProjectileSpawnPosition.position);
+	}
+
+	public float GetHealthbarWidth()
+	{
+		return (adjustedHealth - maxHealth) * 10.0f + 200.0f;
 	}
 }

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: b3c1f4ee64f59504faf63fd26e690a4e
+timeCreated: 1512273508
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Techno Hideo
+  fontNames:
+  - Techno Hideo
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 63f21a8e50deb4743ad9444973b93079, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
