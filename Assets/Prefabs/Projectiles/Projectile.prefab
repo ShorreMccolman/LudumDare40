@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 136717853262554708}
   - component: {fileID: 54763129761990176}
   m_Layer: 0
-  m_Name: EnemyProjectile
+  m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,8 +172,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  speed: 5
-  explosion: {fileID: 0}
+  speed: 12
+  explosion: {fileID: 114385282742845996, guid: 8df97395f86682141bb127baa64ff0f9,
+    type: 2}
 --- !u!136 &136717853262554708
 CapsuleCollider:
   m_ObjectHideFlags: 1
