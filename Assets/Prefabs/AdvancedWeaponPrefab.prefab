@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayName: Photon Bomber
-  PickupText: Press e or scroll the mousewheel to toggle weapons
+  PickupText: Press e or scroll the mousewheel to toggle weapons. Opens green doors.
   ProjectilePrefab: {fileID: 114261412947451934, guid: 2de80879dea58024b9f9ccb978e24958,
     type: 2}
   soundID: Fire2
