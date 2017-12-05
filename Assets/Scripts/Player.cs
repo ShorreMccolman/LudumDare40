@@ -101,7 +101,7 @@ public class Player : Actor {
 	void Update()
 	{
 		var vignette = profile.vignette.settings;
-		if (vignette.intensity > 0.01f) {
+		if (vignette.intensity > 0.001f) {
 			vignette.intensity = vignette.intensity - 0.5f * Time.deltaTime;
 			profile.vignette.settings = vignette;
 		} else {
@@ -130,6 +130,8 @@ public class Player : Actor {
 	{
 		ItemsCollected += 1;
 
+		SoundManager.Instance.PlaySoundEffect ("Pickup");
+
 		if(ItemsCollected % 2 == 1)
 			SoundManager.Instance.AddNextMusicTrack ();
 
@@ -145,24 +147,35 @@ public class Player : Actor {
 		RecentPickup = null;
 	}
 
+	public void Victory()
+	{
+		hud.ShowEndGame (this, true);
+	}
+
 	public override void Damage(int damage)
 	{
 		base.Damage (damage);
 
 		var vignette = profile.vignette.settings;
-		vignette.intensity = 0.666f;
+		vignette.intensity = 0.5f;
 		profile.vignette.settings = vignette;
 		profile.vignette.enabled = true;
 
 		if(CurrentHealth <= 0) {
 			IsDead = true;
+			SoundManager.Instance.PlaySoundEffect ("Death");
+			hud.ShowEndGame (this, false);
+		} else {
+			SoundManager.Instance.PlaySoundEffect ("Hit");
+			hud.UpdateHUD (this);
 		}
-
-		hud.UpdateHUD (this);
 	}
 
 	protected override void FireWeapon()
 	{
+		if (IsPaused)
+			return;
+
 		base.FireWeapon ();
 	}
 
@@ -182,6 +195,7 @@ public class Player : Actor {
 
 	public void TogglePause()
 	{
+		SoundManager.Instance.PlaySoundEffect ("Click");
 		IsPaused = !IsPaused;
 	}
 
@@ -204,6 +218,8 @@ public class Player : Actor {
 			flashlight.enabled = false;
 			return;
 		}
+
+		SoundManager.Instance.PlaySoundEffect ("Flash");
 
 		flashlight.enabled = !flashlight.enabled;
 	}

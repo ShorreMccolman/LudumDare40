@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc29ff56f19e3f043aa6652d98b8d9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
-  speed: 5
+  damage: 3
+  speed: 6
   explosion: {fileID: 114318356647740500, guid: 8a5f08d42cd9b2b49872dd880cbbee42,
     type: 2}
   weaponType: 1

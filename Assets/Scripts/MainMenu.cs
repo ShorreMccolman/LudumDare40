@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour {
 	void Start()
 	{
 		SoundManager.Instance.StartMenuMusic ();
+		Time.timeScale = 1.0f;
 	}
 
 	public void StartGame()

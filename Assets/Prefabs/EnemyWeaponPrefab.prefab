@@ -55,3 +55,4 @@ MonoBehaviour:
   PickupText: 
   ProjectilePrefab: {fileID: 114261412947451934, guid: 4817ca9a2b5eff84bb3e3efa13ba57bd,
     type: 2}
+  soundID: Fire

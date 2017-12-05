@@ -55,3 +55,4 @@ MonoBehaviour:
   PickupText: Press left mouse button or space to fire. Opens red doors.
   ProjectilePrefab: {fileID: 114261412947451934, guid: 121d12856fd8c1f48a1e7d1853b9457b,
     type: 2}
+  soundID: Fire

@@ -35,7 +35,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4999100298552262}
   - component: {fileID: 114421013596445208}
-  - component: {fileID: 82168020526768088}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -70,86 +69,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &82168020526768088
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1422510982043344}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!114 &114421013596445208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,6 +88,27 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2e67497400163c14499f6afb2ae81fa8, type: 3}
   soundClips:
   - clipID: Click
+    volume: 1
+    clip: {fileID: 8300000, guid: fd31f80afcf979c4aa2b7f0a0f8c3c1a, type: 3}
+  - clipID: Disable
+    volume: 1
+    clip: {fileID: 8300000, guid: a878288b54ffaed4986c06aad3459bbd, type: 3}
+  - clipID: Death
+    volume: 1
+    clip: {fileID: 8300000, guid: 263586083be523f46838f40d4b947ace, type: 3}
+  - clipID: Pickup
+    volume: 1
+    clip: {fileID: 8300000, guid: f605c10cbe30c0946a9f3f423dfe8036, type: 3}
+  - clipID: Fire
+    volume: 1
+    clip: {fileID: 8300000, guid: b19e90c87157f2a4a80430db66917f10, type: 3}
+  - clipID: Fire2
+    volume: 1
+    clip: {fileID: 8300000, guid: 40b8ec4fa415943ac8446d82f0b7c5c7, type: 3}
+  - clipID: Hit
+    volume: 1
+    clip: {fileID: 8300000, guid: a661aa02e1d184e7895e92cb02d2fb46, type: 3}
+  - clipID: Flash
     volume: 1
     clip: {fileID: 8300000, guid: 9eda5ac0a1c5fc24aa3f466046e84a18, type: 3}
   sourceObject: {fileID: 1003546481806892}

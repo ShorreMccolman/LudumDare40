@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon : Item {
 	
 	public Projectile ProjectilePrefab;
+	public string soundID;
 
 	public override void EquipItemToPlayer(Player player)
 	{

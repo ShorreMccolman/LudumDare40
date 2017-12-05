@@ -55,3 +55,4 @@ MonoBehaviour:
   PickupText: Press e or scroll the mousewheel to toggle weapons
   ProjectilePrefab: {fileID: 114261412947451934, guid: 2de80879dea58024b9f9ccb978e24958,
     type: 2}
+  soundID: Fire2

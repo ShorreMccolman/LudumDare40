@@ -46,6 +46,7 @@ public class Projectile : MonoBehaviour {
 		Door door = other.GetComponent<Door> ();
 		if(door) {
 			if(door.weaponType == weaponType) {
+				SoundManager.Instance.PlaySoundEffect ("Disable");
 				Destroy (door.gameObject);
 			}
 		}

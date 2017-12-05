@@ -171,10 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc29ff56f19e3f043aa6652d98b8d9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
   speed: 12
   explosion: {fileID: 114385282742845996, guid: 8df97395f86682141bb127baa64ff0f9,
     type: 2}
+  weaponType: 0
 --- !u!136 &136717853262554708
 CapsuleCollider:
   m_ObjectHideFlags: 1

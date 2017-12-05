@@ -103,6 +103,8 @@ public class Actor : MonoBehaviour {
 		obj.transform.position = ProjectileSpawnPosition.position;
 		obj.transform.rotation = ProjectileSpawnPosition.rotation;
 		obj.SetOrigin (ProjectileSpawnPosition.position);
+
+		SoundManager.Instance.PlaySoundEffect (CurrentWeapon.soundID,true);
 	}
 
 	public float GetHealthbarWidth()

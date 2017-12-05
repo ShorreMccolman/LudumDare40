@@ -8,6 +8,8 @@ public struct StatsForLevel {
 	public float firerate;
 	public float rotationSpeed;
 	public float moveSpeed;
+	public float range;
+	public int health;
 
 	public StatsForLevel(int Level)
 	{
@@ -15,61 +17,74 @@ public struct StatsForLevel {
 		firerate = 1.0f;
 		rotationSpeed = 1.0f;
 		moveSpeed = 1.0f;
+		range = 8.0f;
+		health = 6;
 
 		if(Level == 1) {
 			
 			dormant = true;
-			firerate = 1.5f;
-			rotationSpeed = 0.5f;
-			moveSpeed = 0.0f;
+			firerate = 0f;
+			rotationSpeed = 0f;
+			moveSpeed = 0f;
 
 		} else if (Level == 2) {
 
-			firerate = 1.0f;
+			firerate = 1.5f;
 			rotationSpeed = 1.0f;
-			moveSpeed = 0.0f;
+			moveSpeed = 0.1f;
 			
 		} else if (Level == 3) {
 
 			firerate = 1.0f;
-			rotationSpeed = 1.0f;
-			moveSpeed = 0.5f;
+			rotationSpeed = 1.5f;
+			moveSpeed = 0.75f;
 			
 		} else if (Level == 4) {
 
 			firerate = 0.8f;
-			rotationSpeed = 1.0f;
+			rotationSpeed = 2.0f;
 			moveSpeed = 1.0f;
+			range = 7.5f;
 
 		} else if (Level == 5) {
 
 			firerate = 0.7f;
-			rotationSpeed = 1.5f;
-			moveSpeed = 1.0f;
+			rotationSpeed = 3.0f;
+			moveSpeed = 1.25f;
+			range = 7.0f;
+			health = 10;
 
 		} else if (Level == 6) {
 
 			firerate = 0.6f;
-			rotationSpeed = 1.5f;
-			moveSpeed = 1.25f;
+			rotationSpeed = 4.0f;
+			moveSpeed = 1.5f;
+			range = 6.5f;
+			health = 10;
 
 		} else if (Level == 7) {
 
 			firerate = 0.5f;
-			rotationSpeed = 2.0f;
-			moveSpeed = 1.5f;
+			rotationSpeed = 5.0f;
+			moveSpeed = 2.0f;
+			range = 6.0f;
+			health = 10;
 
 		} else if (Level == 8) {
 
-			firerate = 0.3f;
-			rotationSpeed = 2.0f;
-			moveSpeed = 1.8f;
+			firerate = 0.4f;
+			rotationSpeed = 8.0f;
+			moveSpeed = 2.5f;
+			range = 5.0f;
+			health = 10;
 
 		} else if (Level == 9) {
 
-			firerate = 0.2f;
-			rotationSpeed = 3.0f;
-			moveSpeed = 2.0f;
+			firerate = 0.3f;
+			rotationSpeed = 10.0f;
+			moveSpeed = 3.0f;
+			range = 5.0f;
+			health = 15;
 
 		}
 	}
@@ -83,6 +98,7 @@ public class Enemy : Actor {
 	float moveSpeed;
 	bool dormant;
 	float cooldown;
+	float range;
 
 	public Weapon defaultWeapon;
 	public Light headlight;
@@ -102,11 +118,13 @@ public class Enemy : Actor {
 
 				Vector3 towardPlayer = player.transform.position - transform.position;
 
+				bool hasSight = false;
 				RaycastHit hit;
 				Ray ray = new Ray (transform.position, towardPlayer);
 				if(Physics.Raycast (ray, out hit)) {
-					if(hit.collider.tag != "Player") {
-						return;
+					Debug.LogError (hit.collider.gameObject.name);
+					if(hit.collider.tag == "Player") {
+						hasSight = true;
 					}
 				}
 
@@ -114,23 +132,24 @@ public class Enemy : Actor {
 
 				float angle = Vector3.Angle (transform.forward, towardPlayer);
 
-				if (dist > 10.0f) {
+				if (dist > range) {
 					headlight.color = Color.yellow;
-					if(angle < viewAngle * 2.0f)
+					if(angle < viewAngle * 2.0f && hasSight)
 						ForwardMotion (moveSpeed * Time.fixedDeltaTime);
 				} else {
+					headlight.color = Color.red;
 					if (dist < 5.0f && angle < viewAngle) {
 						ForwardMotion (-moveSpeed * Time.fixedDeltaTime);
 					}
-
-					headlight.color = Color.red;
-					if(cooldown <= 0) {
-						if( angle < viewAngle)
-							FireWeapon ();
-					} else {
-						cooldown -= Time.deltaTime;
-					}
 				}
+
+				if(dist < 10.0f && angle < viewAngle && hasSight && cooldown <= 0) {
+					FireWeapon ();
+				}
+
+				if (cooldown > 0)
+					cooldown -= Time.deltaTime;
+
 			} else {
 				headlight.color = Color.white;
 			}
@@ -158,6 +177,8 @@ public class Enemy : Actor {
 		fireRate = stats.firerate;
 		rotationSpeed = stats.rotationSpeed;
 		moveSpeed = stats.moveSpeed;
+		range = stats.range;
+		maxHealth = stats.health;
 	}
 
 	public override void Damage(int damage)
@@ -166,6 +187,8 @@ public class Enemy : Actor {
 
 		if(CurrentHealth <= 0) {
 			EnemyManager.Instance.KillEnemy (this);
+		} else {
+			SoundManager.Instance.PlaySoundEffect ("Hit");
 		}
 	}
 		
